@@ -15,9 +15,14 @@ function App() {
           <div className="flex justify-end">
             <ModeToggle />
           </div>
-          <div className="container mx-auto">
-            <Header/>
+          <div className="container mx-auto gap-3">
+            <Header />
+            <hr />
+            <br />
+            <br />
             <TasksList />
+
+            <hr />
             <TasksForm />
           </div>
         </div>

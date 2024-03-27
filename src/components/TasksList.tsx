@@ -17,7 +17,8 @@ function TasksList() {
   const tasks = useAppSelector((state) => state.tasks);
 
   return (
-    <Table>
+    <Table className="mb-16">
+      <hr/>
       <TableCaption>A list of your recent tasks.</TableCaption>
       <TableHeader>
         <TableRow>
