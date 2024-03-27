@@ -3,6 +3,12 @@ import TasksForm from "./components/TasksForm";
 import TasksList from "./components/TasksList";
 import { ThemeProvider } from "./components/ThemeProvider";
 import Header from "./components/ui/Header";
+ 
+
+
+//! Componente Header de shadcn
+//! Agregar todos los cambos en TasksForm de nuestro estado en toolkit
+
 
 function App() {
   return (
