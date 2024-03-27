@@ -1,4 +1,5 @@
 import { ModeToggle } from "./components/ModeToogle";
+import TasksList from "./components/TasksList";
 import { ThemeProvider } from "./components/ThemeProvider";
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
             <ModeToggle />
           </div>
           <div className="container mx-auto">
-            <h1>TaskList</h1>
+            <TasksList />
             <h1>TaskForm</h1>
           </div>
         </div>
