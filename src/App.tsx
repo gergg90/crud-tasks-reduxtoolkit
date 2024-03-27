@@ -1,14 +1,11 @@
+import Header from "./components/Header";
 import { ModeToggle } from "./components/ModeToogle";
 import TasksForm from "./components/TasksForm";
 import TasksList from "./components/TasksList";
 import { ThemeProvider } from "./components/ThemeProvider";
-import Header from "./components/ui/Header";
- 
-
 
 //! Componente Header de shadcn
 //! Agregar todos los cambos en TasksForm de nuestro estado en toolkit
-
 
 function App() {
   return (
@@ -19,7 +16,7 @@ function App() {
             <ModeToggle />
           </div>
           <div className="container mx-auto">
-            <Header />
+            <Header/>
             <TasksList />
             <TasksForm />
           </div>
