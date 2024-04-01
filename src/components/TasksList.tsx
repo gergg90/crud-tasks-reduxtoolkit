@@ -9,16 +9,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { TasksCompleteIcon, TasksIcon, TasksPendingIcon } from "./icons";
+import {
+  DeleteIcon,
+  EditIcon,
+  TasksCompleteIcon,
+  TasksIcon,
+  TasksPendingIcon,
+} from "./icons";
 
 import { useAppSelector } from "@/hooks/useApp";
+import { useTasksActions } from "@/hooks/useTasksActions";
 
 function TasksList() {
   const tasks = useAppSelector((state) => state.tasks);
+  const { deleteTaskFromHook } = useTasksActions();
 
   return (
     <Table className="mb-16">
-      <hr/>
+      <hr />
       <TableCaption>A list of your recent tasks.</TableCaption>
       <TableHeader>
         <TableRow>
@@ -26,8 +34,8 @@ function TasksList() {
           <TableHead>Title</TableHead>
           <TableHead>Description</TableHead>
           <TableHead>Author</TableHead>
-          <TableHead>Actions</TableHead>
-          <TableHead className="text-right">Checked</TableHead>
+          <TableHead>Checked</TableHead>
+          <TableHead className="text-right">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -36,19 +44,29 @@ function TasksList() {
 
           return (
             <TableRow key={task.id}>
-              <TableCell className="font-medium">{task.id}</TableCell>
+              <TableCell className="font-small">{task.id}</TableCell>
               <TableCell className="font-medium">{task.title}</TableCell>
               <TableCell className="font-medium">{task.description}</TableCell>
               <TableCell className="font-medium">{task.author}</TableCell>
-              <TableCell className="font-medium">Actions</TableCell>
 
-              <TableCell className="items-end text-right">
-                <div className="flex justify-end">
+              <TableCell>
+                <div>
                   {checkStatusTask ? (
                     <TasksCompleteIcon />
                   ) : (
                     <TasksPendingIcon />
                   )}
+                </div>
+              </TableCell>
+
+              <TableCell className="items-end text-right">
+                <div className="flex justify-end gap-2">
+                  <button>
+                    <EditIcon />
+                  </button>
+                  <button onClick={() => deleteTaskFromHook(task.id)}>
+                    <DeleteIcon />
+                  </button>
                 </div>
               </TableCell>
             </TableRow>

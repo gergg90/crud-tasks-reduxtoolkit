@@ -99,13 +99,6 @@ function TasksForm() {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription
-                    className="ml-1
-                  "
-                  >
-                    Add and complete your tasks
-                  </FormDescription>
-                  <FormMessage />
                 </FormItem>
               )}
             />

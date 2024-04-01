@@ -1,11 +1,16 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
+export type TaskId = string;
+
 export interface Tasks {
-  id: string;
   title: string;
   description: string;
   checked: boolean;
   author: string;
+}
+
+export interface TasksWithId extends Tasks {
+  id: TaskId;
 }
 
 // const DEFAULT_STATE: Tasks[] = [];
@@ -41,8 +46,11 @@ export const tasksSlice = createSlice({
       const newTask = [...state, { id, ...action.payload }];
       return newTask;
     },
+    deleteTask: (state, action: PayloadAction<TaskId>) => {
+      return state.filter((state) => state.id !== action.payload);
+    },
   },
 });
 
-export const { createTask } = tasksSlice.actions;
+export const { createTask, deleteTask } = tasksSlice.actions;
 export default tasksSlice.reducer;

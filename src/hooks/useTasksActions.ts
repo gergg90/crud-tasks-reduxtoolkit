@@ -1,4 +1,4 @@
-import { createTask } from "@/features/tasks/tasksSlice";
+import { createTask, deleteTask, TaskId } from "@/features/tasks/tasksSlice";
 import { useAppDispatch } from "./useApp";
 
 export const useTasksActions = () => {
@@ -8,5 +8,9 @@ export const useTasksActions = () => {
     dispatch(createTask({ title, description, author, checked }));
   };
 
-  return { createTaskFromHook };
+  const deleteTaskFromHook = (id: TaskId) => {
+    dispatch(deleteTask(id));
+  };
+
+  return { createTaskFromHook, deleteTaskFromHook };
 };
