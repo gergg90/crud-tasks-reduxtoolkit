@@ -11,36 +11,44 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { InputShadcn } from "@/components/ui/input";
+import { useTasksActions } from "@/hooks/useTasksActions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
 
 const tasksFormSchema = z.object({
-  // id: z.string().uuid(),
   title: z.string().min(4).max(20),
-  bio: z
+  description: z
     .string()
     .min(10, {
-      message: "Bio must be at least 10 characters.",
+      message: "Description must be at least 10 characters.",
     })
     .max(160, {
-      message: "Bio must not be longer than 30 characters.",
+      message: "Description must not be longer than 30 characters.",
     }),
   author: z.string(),
   checked: z.boolean(),
 });
 
 function TasksForm() {
+  const { createTaskFromHook } = useTasksActions();
+
   const form = useForm<z.infer<typeof tasksFormSchema>>({
     resolver: zodResolver(tasksFormSchema),
     defaultValues: {
+      title: "",
+      description: "",
+      author: "",
       checked: false,
     },
   });
 
   const onSubmit = (values: z.infer<typeof tasksFormSchema>) => {
-    console.log(values);
+    const { title, description, author, checked } = values;
+
+    createTaskFromHook({ title, description, author, checked });
+    form.reset();
   };
 
   return (
@@ -80,10 +88,10 @@ function TasksForm() {
 
             <FormField
               control={form.control}
-              name="bio"
+              name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="ml-1">Bio:</FormLabel>
+                  <FormLabel className="ml-1">Description:</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="...write a short description"

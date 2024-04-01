@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface Tasks {
   id: string;
@@ -16,19 +16,33 @@ export interface Tasks {
 // })();
 
 const initialState: Tasks[] = [
-  {
-    id: "1",
-    title: "titulo1",
-    description: "Este es mi primera tarea",
-    checked: true,
-    author: "Germain Gutierez",
-  },
+  // {
+  //   id: "1",
+  //   title: "titulo1",
+  //   description: "Este es mi primera tarea",
+  //   checked: true,
+  //   author: "Germain Gutierez",
+  // },
+  // {
+  //   id: "12",
+  //   title: "IMPORTANTE TAREA A CUNPLIR",
+  //   description: "Hacerle unos masajes eroticos a ger en choroni.",
+  //   checked: false,
+  //   author: "Jesysbeth Moreno",
+  // },
 ];
 
 export const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    createTask: (state, action: PayloadAction<Tasks>) => {
+      const id = crypto.randomUUID();
+      const newTask = [...state, { id, ...action.payload }];
+      return newTask;
+    },
+  },
 });
 
+export const { createTask } = tasksSlice.actions;
 export default tasksSlice.reducer;

@@ -4,9 +4,6 @@ import TasksForm from "./components/TasksForm";
 import TasksList from "./components/TasksList";
 import { ThemeProvider } from "./components/ThemeProvider";
 
-//! Componente Header de shadcn
-//! Agregar todos los cambos en TasksForm de nuestro estado en toolkit
-
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -20,10 +17,10 @@ function App() {
             <hr />
             <br />
             <br />
-            <TasksList />
+            <TasksForm />
 
             <hr />
-            <TasksForm />
+            <TasksList />
           </div>
         </div>
       </div>
