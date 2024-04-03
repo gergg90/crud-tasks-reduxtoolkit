@@ -2,10 +2,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import { ModeToggle } from "./components/ModeToogle";
 import { NavBar } from "./components/NavBar";
+import NotFound from "./components/NotFound";
 import TasksForm from "./components/TasksForm";
 import TasksList from "./components/TasksList";
 import { ThemeProvider } from "./components/ThemeProvider";
-import NotFound from "./components/NotFound";
+
+
+// TODO 
+//! Complete Edit Task
+//! Complete logalstorage
 
 function App() {
   return (

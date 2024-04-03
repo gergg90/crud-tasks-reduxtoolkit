@@ -13,29 +13,12 @@ export interface TasksWithId extends Tasks {
   id: TaskId;
 }
 
-// const DEFAULT_STATE: Tasks[] = [];
+const DEFAULT_STATE: Tasks[] = [];
 
-// const initialState = (() => {
-//   const taskStorage = window.localStorage.getItem("tasks");
-//   return taskStorage ? JSON.parse(taskStorage).tasks : DEFAULT_STATE;
-// })();
-
-const initialState: Tasks[] = [
-  // {
-  //   id: "1",
-  //   title: "titulo1",
-  //   description: "Este es mi primera tarea",
-  //   checked: true,
-  //   author: "Germain Gutierez",
-  // },
-  // {
-  //   id: "12",
-  //   title: "IMPORTANTE TAREA A CUNPLIR",
-  //   description: "Hacerle unos masajes eroticos a ger en choroni.",
-  //   checked: false,
-  //   author: "Jesysbeth Moreno",
-  // },
-];
+const initialState = (() => {
+  const taskStorage = window.localStorage.getItem("tasks");
+  return taskStorage ? JSON.parse(taskStorage).tasks : DEFAULT_STATE;
+})();
 
 export const tasksSlice = createSlice({
   name: "tasks",
