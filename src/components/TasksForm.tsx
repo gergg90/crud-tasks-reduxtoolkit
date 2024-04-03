@@ -14,6 +14,7 @@ import { InputShadcn } from "@/components/ui/input";
 import { useTasksActions } from "@/hooks/useTasksActions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
 
@@ -33,6 +34,7 @@ const tasksFormSchema = z.object({
 
 function TasksForm() {
   const { createTaskFromHook } = useTasksActions();
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof tasksFormSchema>>({
     resolver: zodResolver(tasksFormSchema),
@@ -48,15 +50,24 @@ function TasksForm() {
     const { title, description, author, checked } = values;
 
     createTaskFromHook({ title, description, author, checked });
+    navigate("/tasks");
     form.reset();
   };
 
   return (
     <div className="flex min-h-full flex-col justify-center p-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h1 className="text-2xl font-semibold italic text-center mb-5">
-          Create your task.
-        </h1>
+        <div className="py-6">
+          <blockquote className="text-2xl font-semibold italic text-center">
+            Create your
+            <span className="mx-0.5 before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-rose-600 relative inline-block">
+              <span className="relative text-slate-950">
+                {" "}
+                <div className="flex  px-2 gap-1"> task </div>{" "}
+              </span>
+            </span>
+          </blockquote>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
             <FormField
