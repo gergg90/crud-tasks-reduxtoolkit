@@ -7,8 +7,7 @@ import TasksForm from "./components/TasksForm";
 import TasksList from "./components/TasksList";
 import { ThemeProvider } from "./components/ThemeProvider";
 
-
-// TODO 
+// TODO
 //! Complete Edit Task
 //! Complete logalstorage
 
@@ -27,8 +26,8 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/tasks" element={<TasksList />} />
                 <Route path="/create/task" element={<TasksForm />} />
+                <Route path="/edit/task/:id" element={<TasksForm />} />
                 <Route path="*" element={<NotFound />} />
-
               </Routes>
             </div>
           </div>

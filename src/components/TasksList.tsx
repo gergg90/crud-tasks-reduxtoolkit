@@ -19,6 +19,7 @@ import {
 
 import { useAppSelector } from "@/hooks/useApp";
 import { useTasksActions } from "@/hooks/useTasksActions";
+import { Link } from "react-router-dom";
 
 function TasksList() {
   const tasks = useAppSelector((state) => state.tasks);
@@ -75,9 +76,9 @@ function TasksList() {
 
                 <TableCell className="items-end text-right">
                   <div className="flex justify-end gap-2">
-                    <button>
+                    <Link to={`/edit/task/${task.id}`}>
                       <EditIcon />
-                    </button>
+                    </Link>
                     <button onClick={() => deleteTaskFromHook(task.id)}>
                       <DeleteIcon />
                     </button>

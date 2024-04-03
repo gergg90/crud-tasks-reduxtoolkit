@@ -11,10 +11,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { InputShadcn } from "@/components/ui/input";
+import { useAppSelector } from "@/hooks/useApp";
 import { useTasksActions } from "@/hooks/useTasksActions";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Switch } from "./ui/switch";
 import { Textarea } from "./ui/textarea";
 
@@ -34,15 +36,23 @@ const tasksFormSchema = z.object({
 
 function TasksForm() {
   const { createTaskFromHook } = useTasksActions();
+  const [task, setTask] = useState({
+    title: "",
+    description: "",
+    author: "",
+    checked: false,
+  });
+  const tasks = useAppSelector((state) => state.tasks);
   const navigate = useNavigate();
+  const params = useParams();
 
   const form = useForm<z.infer<typeof tasksFormSchema>>({
     resolver: zodResolver(tasksFormSchema),
     defaultValues: {
-      title: "",
-      description: "",
-      author: "",
-      checked: false,
+      title: task.title,
+      description: task.description,
+      author: task.author,
+      checked: task.checked,
     },
   });
 
@@ -53,6 +63,20 @@ function TasksForm() {
     navigate("/tasks");
     form.reset();
   };
+
+  useEffect(() => {
+    if (params.id) {
+      const foundTask = tasks.find((task) => task.id === params.id);
+
+      if (foundTask) {
+        setTask(foundTask);
+        form.setValue("title", foundTask.title);
+        form.setValue("description", foundTask.description);
+        form.setValue("author", foundTask.author);
+        form.setValue("checked", foundTask.checked);
+      }
+    }
+  }, []);
 
   return (
     <div className="flex min-h-full flex-col justify-center p-6 lg:px-8 ">
