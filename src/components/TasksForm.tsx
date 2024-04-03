@@ -52,7 +52,7 @@ function TasksForm() {
   };
 
   return (
-    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 ">
+    <div className="flex min-h-full flex-col justify-center p-6 lg:px-8 ">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h1 className="text-2xl font-semibold italic text-center mb-5">
           Create your task.
@@ -72,6 +72,7 @@ function TasksForm() {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="author"
@@ -94,11 +95,15 @@ function TasksForm() {
                   <FormLabel className="ml-1">Description:</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="...write a short description"
+                      placeholder="...description"
                       className="resize-none"
                       {...field}
                     />
                   </FormControl>
+                  <FormDescription>
+                    You can <span>@mention</span> other users and organizations.
+                  </FormDescription>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -110,7 +115,7 @@ function TasksForm() {
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                   <div className="space-y-0.5">
                     <FormLabel>Checked</FormLabel>
-                    <FormDescription></FormDescription>
+                    <FormDescription>Complete your task</FormDescription>
                   </div>
                   <FormControl>
                     <Switch
