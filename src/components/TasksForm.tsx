@@ -35,7 +35,7 @@ const tasksFormSchema = z.object({
 });
 
 function TasksForm() {
-  const { createTaskFromHook } = useTasksActions();
+  const { createTaskFromHook, updateTaskFromHook } = useTasksActions();
   const [task, setTask] = useState({
     title: "",
     description: "",
@@ -59,9 +59,20 @@ function TasksForm() {
   const onSubmit = (values: z.infer<typeof tasksFormSchema>) => {
     const { title, description, author, checked } = values;
 
-    createTaskFromHook({ title, description, author, checked });
+    if (params.id) {
+      updateTaskFromHook({
+        id: params.id,
+        title,
+        description,
+        author,
+        checked,
+      });
+    } else {
+      createTaskFromHook({ title, description, author, checked });
+      form.reset();
+    }
+
     navigate("/tasks");
-    form.reset();
   };
 
   useEffect(() => {
