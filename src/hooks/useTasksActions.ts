@@ -11,12 +11,13 @@ export const useTasksActions = () => {
   const dispatch = useAppDispatch();
 
   const createTaskFromHook = ({
+    id,
     title,
     description,
     author,
     checked,
   }: Tasks) => {
-    dispatch(createTask({ title, description, author, checked }));
+    dispatch(createTask({ id, title, description, author, checked }));
   };
 
   const deleteTaskFromHook = (id: TaskId) => {

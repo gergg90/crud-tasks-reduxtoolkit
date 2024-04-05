@@ -26,16 +26,15 @@ export const tasksSlice = createSlice({
   initialState,
   reducers: {
     createTask: (state, action: PayloadAction<Tasks>) => {
-      const id = crypto.randomUUID();
-      const newTask = [...state, { id, ...action.payload }];
+      const newTask = [...state, { ...action.payload }];
       return newTask;
     },
     deleteTask: (state, action: PayloadAction<TaskId>) => {
-      return state.filter((state) => state.id !== action.payload);
+      return state.filter((state: Tasks) => state.id !== action.payload);
     },
     updateTask: (state, action: PayloadAction<Tasks>) => {
       const taskToUpdateIndex = state.findIndex(
-        (state) => state.id === action.payload.id
+        (state: Tasks) => state.id === action.payload.id
       );
 
       if (taskToUpdateIndex !== -1) {

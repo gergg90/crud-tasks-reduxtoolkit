@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { InputShadcn } from "@/components/ui/input";
+import { Tasks } from "@/features/tasks/tasksSlice";
 import { useAppSelector } from "@/hooks/useApp";
 import { useTasksActions } from "@/hooks/useTasksActions";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,7 +69,8 @@ function TasksForm() {
         checked,
       });
     } else {
-      createTaskFromHook({ title, description, author, checked });
+      const id = crypto.randomUUID();
+      createTaskFromHook({ id, title, description, author, checked });
       form.reset();
     }
 
@@ -77,7 +79,7 @@ function TasksForm() {
 
   useEffect(() => {
     if (params.id) {
-      const foundTask = tasks.find((task) => task.id === params.id);
+      const foundTask = tasks.find((task: Tasks) => task.id === params.id);
 
       if (foundTask) {
         setTask(foundTask);

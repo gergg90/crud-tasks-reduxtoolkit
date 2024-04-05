@@ -17,6 +17,7 @@ import {
   TasksPendingIcon,
 } from "./icons";
 
+import { Tasks } from "@/features/tasks/tasksSlice";
 import { useAppSelector } from "@/hooks/useApp";
 import { useTasksActions } from "@/hooks/useTasksActions";
 import { Link } from "react-router-dom";
@@ -52,7 +53,7 @@ function TasksList() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {tasks.map((task) => {
+          {tasks.map((task: Tasks) => {
             const checkStatusTask = task.checked;
 
             return (
